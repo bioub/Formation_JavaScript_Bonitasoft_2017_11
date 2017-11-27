@@ -1,5 +1,4 @@
-// 1 - créer random avec object literal
-// tel que random.getIntInclusive(0, 100)
+// 1 - Method properties et default value
 const random = {
   getInt: function (min, max) {
     min = Math.ceil(min);
@@ -15,11 +14,12 @@ const random = {
 
 const readline = require('readline');
 
-// 2 - créer une fonction constructeur Jeu
-// avec jouer sur son prototype
-// tel que  :
+// 2 - class
 const Jeu = function(options) {
+  // 3 - default value
   options = options || {};
+
+  // 4 - destructuring object
   const min = options.min || 0;
   const max = (options.max !== undefined) ? options.max : 100;
 
@@ -34,14 +34,15 @@ const Jeu = function(options) {
 
 Jeu.prototype.jouer = function() {
   if (this._essais.length) {
+    // 5 - Template string
     console.log('Vous avez déjà joué : ' + this._essais.join(' - '));
   }
 
   this._rl.question('Quel est le nombre ? ', (answer) => {
 
-    const entierSaisi = parseInt(answer);
+    const entierSaisi = Number.parseInt(answer);
 
-    if (isNaN(entierSaisi)) {
+    if (Number.isNaN(entierSaisi)) {
       console.log('Erreur : il faut saisir un nombre');
       return this.jouer();
     }
