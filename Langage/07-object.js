@@ -111,6 +111,7 @@ const Voiture = function(marque) {
 
 
 
+
 const clio = new Voiture('Renault');
 console.log(clio.getMarque()); // Renault
 clio.setMarque('Peugeot'); // Renault

@@ -1,11 +1,11 @@
 // 1 - Method properties et default value
 const random = {
-  getInt: function (min, max) {
+  getInt(min, max) {
     min = Math.ceil(min);
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
   },
-  getIntInclusive: function (min, max) {
+  getIntInclusive(min, max) {
     min = Math.ceil(min);
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min + 1)) + min; //The maximum is inclusive and the minimum is inclusive
@@ -15,59 +15,69 @@ const random = {
 const readline = require('readline');
 
 // 2 - class
-const Jeu = function(options) {
-  // 3 - default value
-  options = options || {};
+class Jeu {
+  constructor(options = {}) {
+    // 3 - default value
+    // options = options || {};
 
-  // 4 - destructuring object
-  const min = options.min || 0;
-  const max = (options.max !== undefined) ? options.max : 100;
+    // 4 - destructuring object
+    // const min = options.min || 0;
+    // const max = (options.max !== undefined) ? options.max : 100;
+    const {
+      min = 0,
+      max = 100,
+    } = options;
 
-  this._rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout,
-  });
+    // Object.assign(this, {min: 0, max: 100}, options);
 
-  this._entierAlea = random.getIntInclusive(min, max);
-  this._essais = [];
-};
+    this._rl = readline.createInterface({
+      input: process.stdin,
+      output: process.stdout,
+    });
 
-Jeu.prototype.jouer = function() {
-  if (this._essais.length) {
-    // 5 - Template string
-    console.log('Vous avez déjà joué : ' + this._essais.join(' - '));
+    this._entierAlea = random.getIntInclusive(min, max);
+    this._essais = [];
   }
 
-  this._rl.question('Quel est le nombre ? ', (answer) => {
-
-    const entierSaisi = Number.parseInt(answer);
-
-    if (Number.isNaN(entierSaisi)) {
-      console.log('Erreur : il faut saisir un nombre');
-      return this.jouer();
+  jouer() {
+    if (this._essais.length) {
+      // 5 - Template string
+      console.log(`Vous avez déjà joué : ${this._essais.join(' - ')}`);
     }
 
-    this._essais.push(entierSaisi);
+    this._rl.question('Quel est le nombre ? ', (answer) => {
 
-    if (entierSaisi < this._entierAlea) {
-      console.log('Trop petit');
-      return this.jouer();
-    }
+      const entierSaisi = Number.parseInt(answer);
 
-    if (entierSaisi > this._entierAlea) {
-      console.log('Trop grand');
-      return this.jouer();
-    }
+      if (Number.isNaN(entierSaisi)) {
+        console.log('Erreur : il faut saisir un nombre');
+        return this.jouer();
+      }
 
-    console.log('Gagné');
-    this._rl.close();
+      this._essais.push(entierSaisi);
 
-  });
-};
+      if (entierSaisi < this._entierAlea) {
+        console.log('Trop petit');
+        return this.jouer();
+      }
+
+      if (entierSaisi > this._entierAlea) {
+        console.log('Trop grand');
+        return this.jouer();
+      }
+
+      console.log('Gagné');
+      this._rl.close();
+
+    });
+  }
+}
 
 const jeu = new Jeu();
 jeu.jouer();
 
+// console.log(typeof Jeu); // function
+// console.log(typeof Jeu.prototype.jouer); // function
 
 // 3 - Passer des paramètres à Jeu via un objet
 // tel que  :

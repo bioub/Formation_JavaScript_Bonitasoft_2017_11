@@ -4,6 +4,10 @@ nbs.forEach(function(nb, i) {
   console.log(nb, i);
 });
 
+// nbs.forEach((...args) => {
+//   console.log(args);
+// });
+
 nbs.filter(nb => nb % 2 === 0)
    .map(nb => nb * nb)
    .forEach(function(nb, i) {

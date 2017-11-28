@@ -1,6 +1,6 @@
 function externe(msg) {
   // Portée de closure (sauvegardée)
-  //let i = 0;
+  // let i = 0;
   // msg = null; // GC
 
   function interne() {
