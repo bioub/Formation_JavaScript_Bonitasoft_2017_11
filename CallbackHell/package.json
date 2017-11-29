@@ -1,6 +1,10 @@
 {
   "dependencies": {
     "async": "^2.6.0",
-    "fs-extra": "^4.0.2"
+    "fs-extra": "^3.0.0",
+    "rxjs": "^5.5.2"
+  },
+  "devDependencies": {
+    "webpack": "^3.8.1"
   }
 }

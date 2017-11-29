@@ -1,8 +1,8 @@
 import readline from 'readline';
-import random from './random';
+import { getRandomIntInclusive } from './random';
 
 // 2 - class
-export default class Jeu {
+export class Jeu {
   constructor(options = {}) {
     // 3 - default value
     // options = options || {};
@@ -22,7 +22,7 @@ export default class Jeu {
       output: process.stdout,
     });
 
-    this._entierAlea = random.getIntInclusive(min, max);
+    this._entierAlea = getRandomIntInclusive(min, max);
     this._essais = [];
   }
 

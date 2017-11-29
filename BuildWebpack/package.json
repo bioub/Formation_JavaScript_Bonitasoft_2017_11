@@ -1,0 +1,27 @@
+{
+  "dependencies": {
+    "date-fns": "^1.29.0",
+    "moment": "^2.19.2"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "clean-webpack-plugin": "^0.1.17",
+    "eslint": "^4.12.0",
+    "html-webpack-plugin": "^2.30.1",
+    "json5-loader": "^1.0.1",
+    "uglifyjs-webpack-plugin": "^1.1.1",
+    "webpack": "^3.8.1",
+    "webpack-dev-server": "^2.9.5"
+  },
+  "scripts": {
+    "lint": "eslint src",
+    "lint:fix": "eslint --fix src",
+    "serve:dev": "webpack-dev-server",
+    "serve:prod": "webpack-dev-server --env=prod",
+    "build:dev": "webpack",
+    "build:prod": "webpack --env=prod"
+  }
+}
