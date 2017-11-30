@@ -11,15 +11,28 @@ exports.add = async (req, res, next) => {
 };
 
 exports.show = async (req, res, next) => {
-  const contact = await service.findById(req.params.id);
-  res.json(contact);
+  try {
+    const contact = await service.findById(req.params.id);
+
+    if (!contact) {
+      return next(); // 404
+    }
+
+    res.json(contact);
+  }
+  catch (err) {
+    next(err); // 500
+  }
 };
 
 exports.update = async (req, res, next) => {
-
+  req.body.id = Number(req.params.id);
+  const contact = await service.update(req.body);
+  res.json(contact);
 };
 
 exports.remove = async (req, res, next) => {
-
+  const contact = await service.removeById(req.params.id);
+  res.json(contact);
 };
 

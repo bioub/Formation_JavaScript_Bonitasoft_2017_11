@@ -14,7 +14,10 @@ router.post('/',
 
 router.get('/:id', ctrl.show);
 
-router.put('/:id', ctrl.update);
+router.put('/:id',
+  bodyParser.json(),
+  ctrl.update,
+);
 
 router.delete('/:id', ctrl.remove);
 

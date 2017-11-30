@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+  <script>
+    (async () => {
+      const res = await fetch('/api/contacts')
+      const contacts = await res.json();
+
+      contacts.forEach(c => {
+        const div = document.createElement('div');
+        div.innerText = c.prenom + ' ' + c.nom;
+        document.body.appendChild(div);
+      });
+    })()
+  </script>
+</body>
+</html>
