@@ -23,6 +23,6 @@
         "semi": [
             "error",
             "always"
-        ]
+        ],
     }
 }

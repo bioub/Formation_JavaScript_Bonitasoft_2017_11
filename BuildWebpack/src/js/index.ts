@@ -3,6 +3,7 @@
 import { Horloge } from './horloge';
 
 const divElt = document.querySelector('.horloge');
-const clock = new Horloge(divElt);
+const clock = new Horloge({
+  container: <HTMLElement> divElt,
+});
 clock.start();
-

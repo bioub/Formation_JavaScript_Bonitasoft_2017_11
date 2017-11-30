@@ -21,11 +21,14 @@ export default function (env) {
     new HtmlWebpackPlugin({
       template: './src/random.html',
       filename: 'random.html',
-      chunks: ['commons', 'mainRandom']
+      chunks: ['commons', 'mainRandom'],
     }),
     new CleanWebpackPlugin('dist'),
     new webpack.optimize.CommonsChunkPlugin({
       name: 'commons',
+    }),
+    new webpack.ProvidePlugin({
+      $: 'jquery'
     })
   ];
 
@@ -43,21 +46,28 @@ export default function (env) {
       filename: '[name].[hash].js',
     },
     devtool: (env === 'prod') ? false : 'source-map',
+    resolve: {
+      extensions: ['.ts', '.js', '.json']
+    },
     module: {
       rules: [
         {
-          test: /\.js$/,
-          loader: 'babel-loader',
-          exclude: /node_modules/,
-          options: {
-            presets: [['env', {
-              modules: false, // obligatoire pour le tree shaking
-              targets: {
-                browsers: ['Chrome 60', 'Edge 15', 'IE 11']
-              }
-            }]]
-          },
+          test: /\.ts$/,
+          loader: 'awesome-typescript-loader',
         },
+        // {
+        //   test: /\.js$/,
+        //   loader: 'babel-loader',
+        //   exclude: /node_modules/,
+        //   options: {
+        //     presets: [['env', {
+        //       modules: false, // obligatoire pour le tree shaking
+        //       targets: {
+        //         browsers: ['Chrome 60', 'Edge 15', 'IE 11']
+        //       }
+        //     }]]
+        //   },
+        // },
         {
           test: /\.json5$/,
           loader: 'json5-loader',
@@ -65,4 +75,4 @@ export default function (env) {
     },
     plugins
   };
-};
+}
